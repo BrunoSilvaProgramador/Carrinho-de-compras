@@ -6,7 +6,6 @@
     scrollbar-width: none !important;
     font-family: Phantomsans, sans-serif;
 }
-
 html, body{
     height: 100%;
     background-color: #212121;
@@ -104,7 +103,6 @@ input[type=number]::-webkit-inner-spin-button {
 input[type=number] { 
    -moz-appearance: textfield;
    appearance: textfield;
-
 }
 .quant{
     width: 23px;
