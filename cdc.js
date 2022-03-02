@@ -11,7 +11,7 @@ load()
 function load(){
     let cont = document.querySelectorAll('.button_c');
     let des = document.querySelectorAll('.descricao-produto');
-    let apag = document.querySelectorAll('.apagar-produto');
+    let apag = document.querySelectorAll('.excluir');
     let checkbox = document.querySelectorAll('#check');
     let preco = document.querySelectorAll('#preço');
     let quant = document.querySelectorAll('#quantitativo');
@@ -28,8 +28,22 @@ function load(){
             quantidadeCalc.splice(i, 1);
             precosCalc.splice(i, 1);
             result.innerText = 'R$ 0';
+            
         })
-        if(checkbox[i].checked){sit[i] = 1;} else{sit[i] = 0;}
+        sit[i] = 0;
+        check[i].addEventListener('click', function() {
+            if(sit[i] == 0){
+                check[i].classList.add('check_active');
+                sit[i] = 1;
+            }else{
+                check[i].classList.remove('check_active');
+                sit[i] = 0;
+            } 
+        })
+        editar[i].addEventListener('click', function() {
+            array[i] = prompt('Digite o nome da tarefa');
+            des[i].innerText = array[i];
+        })
 
         if(quantidade[i] == 0){quant[i].value = '';} else{quant[i].value = quantidade[i];}
 
@@ -42,6 +56,9 @@ function load(){
         mais[i].addEventListener('click', function(){quant[i].value ++;})
     }
     result.innerText = 'R$ 0';
+    if(cont.length > 0) {
+        p.style.display = 'none';
+    }
 }
 function add() {
     calc()
@@ -50,7 +67,10 @@ function add() {
         alert('Digite o nome do produto')
     }else{
         array.push(nome);
-        back.innerHTML += '<div class="button_c"><span class="container-produtos"><div class="desc"><div class="descricao-produto"></div><input type="checkbox" id="check" checked></div><div class="dados"><div class="quantidade"><button class="quant" id="menos">-</button><input type="number" id="quantitativo" placeholder="Quant"><button class="quant" id="mais">+</button></div><input type="number" id="preço" placeholder="Preço"><button class="apagar-produto">x</button></div></span></div>';
+        back.innerHTML += 
+
+        '<div class="button_c"><span class="container-produtos"><div class="desc"><div class="descricao-produto"></div><div class="excluir"></div><div class="editar"></div><div class="check "></div></div><div class="dados"><div class="quantidade"><button class="quant" id="menos">-</button><input type="number" id="quantitativo" placeholder="Quant"><button class="quant" id="mais">+</button></div><input type="number" id="preço" placeholder="Preço"></div></span></div>';
+        
         load()
     }
     
