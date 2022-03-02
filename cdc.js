@@ -5,7 +5,6 @@ var quantidade = [];
 var quantidadeCalc = [];
 var precos = [];
 var precosCalc = [];
-var sit = [];
 
 load()
 function load(){
@@ -29,21 +28,19 @@ function load(){
             precos.splice(i, 1);
             quantidadeCalc.splice(i, 1);
             precosCalc.splice(i, 1);
-            sit.splice(i, 1);
             result.innerText = 'R$ 0';
             let container = document.querySelectorAll('.button_c');
             if(container.length == 0) {
                 p.style.display = 'block';
             }
             
+            
         })
         checkbox[i].addEventListener('click', function() {
-            if(sit[i] == 1){
+            if(checkbox[i].classList.contains('check_active')){
                 checkbox[i].classList.remove('check_active');
-                sit[i] = 0;
             }else{
                 checkbox[i].classList.add('check_active');
-                sit[i] = 1;
             } 
         })
         editar[i].addEventListener('click', function() {
@@ -77,7 +74,6 @@ function add() {
         array.push(nome);
         back.innerHTML +='<div class="button_c"><span class="container-produtos"><div class="desc"><div class="descricao-produto"></div><div class="excluir"></div><div class="editar"></div><div class="check check_active"></div></div><div class="dados"><div class="quantidade"><button class="quant menos" >-</button><input type="number" class="quantitativo" placeholder="Quant"><button class="quant mais">+</button></div><input type="number" class="preço" placeholder="Preço"></div></span></div>';
         load()
-        sit.push(1)
     }
     
 }
@@ -89,7 +85,7 @@ function calc(){
     quantidadeCalc = [];
     precosCalc = [];
     for(let i=0; i < checkbox.length; i++){
-        if(sit[i] == 1){              
+        if(checkbox[i].classList.contains('check_active')){              
             if(quant[i].value == ''){quant[i].value = 0;}
             if(preco[i].value == ''){preco[i].value = 0;}
             quantidade[i] = quant[i].value;
