@@ -12,11 +12,13 @@ function load(){
     let cont = document.querySelectorAll('.button_c');
     let des = document.querySelectorAll('.descricao-produto');
     let apag = document.querySelectorAll('.excluir');
-    let checkbox = document.querySelectorAll('#check');
-    let preco = document.querySelectorAll('#preço');
-    let quant = document.querySelectorAll('#quantitativo');
-    let menos = document.querySelectorAll('#menos');
-    let mais = document.querySelectorAll('#mais');
+    let checkbox = document.querySelectorAll('.check');
+    let editar = document.querySelectorAll('.editar');
+    let preco = document.querySelectorAll('.preço');
+    let quant = document.querySelectorAll('.quantitativo');
+    let menos = document.querySelectorAll('.menos');
+    let mais = document.querySelectorAll('.mais');
+    let p = document.querySelector('.p')
 
     for(let i = 0; i < cont.length; i++) {
         des[i].innerText = array[i];
@@ -27,17 +29,21 @@ function load(){
             precos.splice(i, 1);
             quantidadeCalc.splice(i, 1);
             precosCalc.splice(i, 1);
+            sit.splice(i, 1);
             result.innerText = 'R$ 0';
+            let container = document.querySelectorAll('.button_c');
+            if(container.length == 0) {
+                p.style.display = 'block';
+            }
             
         })
-        sit[i] = 0;
-        check[i].addEventListener('click', function() {
-            if(sit[i] == 0){
-                check[i].classList.add('check_active');
-                sit[i] = 1;
-            }else{
-                check[i].classList.remove('check_active');
+        checkbox[i].addEventListener('click', function() {
+            if(sit[i] == 1){
+                checkbox[i].classList.remove('check_active');
                 sit[i] = 0;
+            }else{
+                checkbox[i].classList.add('check_active');
+                sit[i] = 1;
             } 
         })
         editar[i].addEventListener('click', function() {
@@ -53,7 +59,9 @@ function load(){
             if(quant[i].value <=0){quant[i].value = 0;} else{quant[i].value--;}
         })
 
-        mais[i].addEventListener('click', function(){quant[i].value ++;})
+        mais[i].addEventListener('click', function(){
+            quant[i].value ++;
+        })
     }
     result.innerText = 'R$ 0';
     if(cont.length > 0) {
@@ -67,58 +75,41 @@ function add() {
         alert('Digite o nome do produto')
     }else{
         array.push(nome);
-        back.innerHTML += 
-
-        '<div class="button_c"><span class="container-produtos"><div class="desc"><div class="descricao-produto"></div><div class="excluir"></div><div class="editar"></div><div class="check "></div></div><div class="dados"><div class="quantidade"><button class="quant" id="menos">-</button><input type="number" id="quantitativo" placeholder="Quant"><button class="quant" id="mais">+</button></div><input type="number" id="preço" placeholder="Preço"></div></span></div>';
-        
+        back.innerHTML +='<div class="button_c"><span class="container-produtos"><div class="desc"><div class="descricao-produto"></div><div class="excluir"></div><div class="editar"></div><div class="check check_active"></div></div><div class="dados"><div class="quantidade"><button class="quant menos" >-</button><input type="number" class="quantitativo" placeholder="Quant"><button class="quant mais">+</button></div><input type="number" class="preço" placeholder="Preço"></div></span></div>';
         load()
+        sit.push(1)
     }
     
 }
 
 function calc(){
-    let checkbox = document.querySelectorAll('#check');
-    let preco = document.querySelectorAll('#preço');
-    let quant = document.querySelectorAll('#quantitativo') 
+    let checkbox = document.querySelectorAll('.check');
+    let preco = document.querySelectorAll('.preço');
+    let quant = document.querySelectorAll('.quantitativo') 
+    quantidadeCalc = [];
+    precosCalc = [];
     for(let i=0; i < checkbox.length; i++){
-        if(sit[i] == 1){
-            if(checkbox[i].checked){                
-                if(quant[i].value == ''){quant[i].value = 0;}
-                if(preco[i].value == ''){preco[i].value = 0;}
-                sit[i] = 1;
-                quantidade[i] = quant[i].value;
-                precos[i] = preco[i].value;
-                quantidadeCalc[i] = quant[i].value;
-                precosCalc[i] = preco[i].value;
-            }else{
-                if(quant[i].value == 0){quant[i].value = '';}
-                if(preco[i].value == 0){preco[i].value = '';}
-                quantidadeCalc[i] = 0;
-                precosCalc[i] = 0;
-            }
+        if(sit[i] == 1){              
+            if(quant[i].value == ''){quant[i].value = 0;}
+            if(preco[i].value == ''){preco[i].value = 0;}
+            quantidade[i] = quant[i].value;
+            precos[i] = preco[i].value;
+            quantidadeCalc[i] = quant[i].value;
+            precosCalc[i] = preco[i].value;
         }else{
-            if(checkbox[i].checked){ 
-                if(quant[i].value == ''){quant[i].value = 0;}
-                if(preco[i].value == ''){preco[i].value = 0;}
-                sit[i] = 1;
-                quantidade[i] = quant[i].value;
-                precos[i] = preco[i].value;
-                quantidadeCalc[i] = quant[i].value;
-                precosCalc[i] = preco[i].value;
-            }else{
-                if(quant[i].value == 0){quant[i].value = '';}
-                if(preco[i].value == 0){preco[i].value = '';}
-                quantidadeCalc[i] = 0;
-                precosCalc[i] = 0;
-            }
+            if(quant[i].value == 0){quant[i].value = '';}
+            if(preco[i].value == 0){preco[i].value = '';}
+            quantidadeCalc[i] = 0;
+            precosCalc[i] = 0;
         }  
     }
 }
 
 
 function calcular(){
+    result.innerText = `R$ 0`;
     calc()
-    let cont = document.querySelectorAll('.container-produtos');
+    let cont = document.querySelectorAll('.button_c');
     let resultado = 0;
     for(let i = 0; i < cont.length; i++) {
         resultado += (Number(quantidadeCalc[i] * precosCalc[i]));

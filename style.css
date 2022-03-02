@@ -34,7 +34,7 @@ html, body{
     overflow-y: scroll;
     position: relative;
 }
-p{
+.p{
     position: absolute;
     top: 50%;
     left: 50%;
@@ -157,12 +157,12 @@ input[type=number] {
 .quantidade{
     width: 40%;
 }
-#quantitativo{
+.quantitativo{
     width: 40%;
     margin: 0 5px;
     text-align: center;
 }
-#preço{
+.preço{
     width: 30%;
     text-align: center;
 }
