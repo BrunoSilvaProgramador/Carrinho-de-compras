@@ -32,7 +32,14 @@ html, body{
     height: 75%;
     background-color: #292929fb;
     overflow-y: scroll;
-
+    position: relative;
+}
+p{
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%);
+    color: rgba(255, 255, 255, 0.445);
 }
 .button_c {
     float: left;
@@ -69,6 +76,7 @@ html, body{
     padding: 10px;
     font-weight: bold;
     overflow-x:auto;
+    margin-left: 10px;
 }
 .descricao-produto::first-letter{
     text-transform: uppercase;
@@ -79,12 +87,49 @@ html, body{
     border-radius: 15px;
     align-items: center;
 }
-input[type=checkbox]{
-    width: 20px;
-    height: 20px;
-    margin: 0 20px;
+.check{
+    width: 25px;
+    height: 25px;
+    margin: 0 20px 0 5px;
     cursor: pointer;
+    border-radius: 3px;
+    background-color: transparent;
+    background-image: url('imagens/verifica1.png');
+    background-position: center;
+    background-size: 100%;
+    background-repeat: no-repeat;
 }
+.check_active{
+    background-image: url('imagens/verifica.png');
+}
+.excluir{
+    width: 26px;
+    height: 26px;
+    margin: 0 5px 0 20px;
+    cursor: pointer;
+    border-radius: 3px;
+    background-color: transparent;
+    background-image: url('imagens/excluir.png');
+    background-position: center;
+    background-size: cover;
+}
+.editar{
+    width: 24px;
+    height: 24px;
+    margin: 5px;
+    cursor: pointer;
+    border-radius: 3px;
+    background-color: transparent;
+    background-image: url('imagens/editar.png');
+    background-position: center;
+    background-size: 100%;
+    background-repeat: no-repeat;
+    position: relative;
+    top: 1px;
+}
+
+
+
 .dados{
     display: flex;
     align-items: center;
@@ -129,6 +174,9 @@ input[type=number] {
     cursor: pointer;
     border-radius: 3px;
 }
+
+
+
 .buttons{
     width: 100%;
     display: flex;
