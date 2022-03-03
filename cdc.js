@@ -44,7 +44,7 @@ function load(){
             } 
         })
         editar[i].addEventListener('click', function() {
-            array[i] = prompt('Digite o nome da tarefa');
+            array[i] = prompt('Digite o nome do produto');
             des[i].innerText = array[i];
         })
 
